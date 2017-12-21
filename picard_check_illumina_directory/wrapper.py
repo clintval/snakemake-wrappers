@@ -20,7 +20,7 @@ link_locs = snakemake.params.get('link_locs', 'false')
 command = (
     "picard CheckIlluminaDirectory"
     " {extra}"
-    " BASECALLS_DIR={snakemake.input.basecalls_dir}"
+    " BASECALLS_DIR={snakemake.input}"
     " READ_STRUCTURE={read_structure}"
     " LINK_LOCS={link_locs}"
     " FAKE_FILES={fake_files}")
