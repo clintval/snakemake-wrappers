@@ -27,15 +27,15 @@ command = (
 
 if data_types != 'null':
     assert isinstance(data_types, (list, tuple)), '`data_types` must be a sequence'
-    data_type_params = [" DATA_TYPES=" + str(data_type) for data_type in data_types]
+    data_type_params = " ".join([" DATA_TYPES=" + str(data_type) for data_type in data_types])
     command += data_type_params
 if lanes_to_check != 'null':
     assert isinstance(lanes_to_check, (list, tuple)), '`lanes_to_check` must be a sequence'
-    lanes_to_check_params = [" LANES=" + str(lanes) for lanes in lanes_to_check]
+    lanes_to_check_params = " ".join([" LANES=" + str(lanes) for lanes in lanes_to_check])
     command += lanes_to_check_params
 if tile_numbers != 'null':
     assert isinstance(tile_numbers, (list, tuple)), '`tile_numbers` must be a sequence'
-    tile_numbers_params = [" TILE_NUMBERS=" + str(tile_number) for tile_number in tile_numbers]
+    tile_numbers_params = " ".join([" TILE_NUMBERS=" + str(tile_number) for tile_number in tile_numbers])
     command += tile_numbers_params
 command += " {log}"
 
