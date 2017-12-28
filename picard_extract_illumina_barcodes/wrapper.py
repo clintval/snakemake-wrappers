@@ -9,10 +9,11 @@ from snakemake.shell import shell
 
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
+lane = snakemake.params["lane"]
+read_structure = snakemake.params['read_structure']
+
 extra = snakemake.params.get("extra", "")
-output_dir = snakemake.params.get("output_dir")
-lane = snakemake.params.get("lane")
-read_structure = snakemake.params.get('read_structure')
+output_dir = snakemake.params.get("output_dir", "null")
 compress_outputs = snakemake.params.get('compress_outputs', 'true')
 
 shell(

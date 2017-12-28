@@ -9,8 +9,9 @@ from snakemake.shell import shell
 
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
+read_structure = snakemake.params['read_structure']
+
 extra = snakemake.params.get("extra", "")
-read_structure - snakemake.params.get('read_structure')
 data_types = snakemake.params.get('data_types', 'null')
 lanes_to_check = snakemake.params.get('lanes_to_check', 'null')
 tile_numbers = snakemake.params.get('tile_numbers', 'null')
@@ -37,6 +38,7 @@ if tile_numbers != 'null':
     assert isinstance(tile_numbers, (list, tuple)), '`tile_numbers` must be a sequence'
     tile_numbers_params = " ".join([" TILE_NUMBERS=" + str(tile_number) for tile_number in tile_numbers])
     command += tile_numbers_params
+
 command += " {log}"
 
 shell(command)
