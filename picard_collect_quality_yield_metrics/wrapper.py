@@ -1,44 +1,55 @@
 """Snakemake wrapper for picard CollectQualityYieldMetrics."""
 
-__author__ = "clintval"
-__copyright__ = "Copyright 2018, Clint Valentine"
-__email__ = "valentine.clint@gmail.com"
-__license__ = "MIT"
+__author__ = 'clintval'
+__copyright__ = 'Copyright 2018, Clint Valentine'
+__email__ = 'valentine.clint@gmail.com'
+__license__ = 'MIT'
 
 from snakemake.shell import shell
 
-log = snakemake.log_fmt_shell(stdout=False, stderr=True)
+def make_picard_params(params):
+    import types
+    formatted_params = ''
 
-input_files = "".join(f" INPUT={bam}" for bam in snakemake.input)
+    def clean_value(value):
+        if value is True:
+            return 'true'
+        elif value is False:
+            return 'false'
+        elif value is None:
+            return 'null'
+        elif isinstance(value, (list, tuple, types.GeneratorType)):
+            return list(map(clean_value, value))
+        else:
+            return value
 
-extra = snakemake.params.get("extra", "")
-use_original_qualities = snakemake.params.get("use_original_qualities", True)
-include_secondary_alignments = snakemake.params.get("include_secondary_alignments", False)
-include_supplemental_alignments = snakemake.params.get("include_supplemental_alignments", False)
-assume_sorted = snakemake.params.get("assume_sorted", True)
-stop_after = snakemake.params.get("stop_after", 0)
+    for key, value in params.items():
+        if key == 'extra':
+            continue
+        value = clean_value(value)
+        if isinstance(value, list):
+            formatted_params += ''.join(f' {key.upper()}={v}' for v in value)
+        else:
+            formatted_params += f' {key.upper()}={value}'
+    return formatted_params
 
-if use_original_qualities != "null":
-    use_original_qualities = "true" if use_original_qualities else "false"
-if include_secondary_alignments != "null":
-    include_secondary_alignments = "true" if include_secondary_alignments else "false"
-if include_supplemental_alignments != "null":
-    include_supplemental_alignments = "true" if include_supplemental_alignments else "false"
-if assume_sorted != "null":
-    assume_sorted = "true" if assume_sorted else "false"
+extra = snakemake.params.get('extra', '')
+params = make_picard_params(snakemake.params)
+log = snakemake.log_fmt_shell(stdout=False, stderr=True, append=True)
+
+input_files = ''.join(f' INPUT={bam}' for bam in snakemake.input)
+
+if snakemake.resources.get('malloc'):
+    extra += f' -Xmx{snakemake.resources.malloc}m'
 
 shell(
-    "picard GatherBamFiles"
-    " {input_files}"
-    " OUTPUT=/dev/stdout"
-    " {log} | "
-    "picard CollectQualityYieldMetrics"
-    " {extra}"
-    " USE_ORIGINAL_QUALITIES={use_original_qualities}"
-    " INCLUDE_SECONDARY_ALIGNMENTS={include_secondary_alignments}"
-    " INCLUDE_SUPPLEMENTAL_ALIGNMENTS={include_supplemental_alignments}"
-    " INPUT=/dev/stdin"
-    " OUTPUT={snakemake.output}"
-    " ASSUME_SORTED={assume_sorted}"
-    " STOP_AFTER={stop_after}"
-    " {log}")
+    'picard GatherBamFiles'
+    ' {input_files}'
+    ' OUTPUT=/dev/stdout'
+    ' {log}'
+    ' | picard CollectQualityYieldMetrics'
+    ' {extra}'
+    ' {params}'
+    ' INPUT=/dev/stdin'
+    ' OUTPUT={snakemake.output}'
+    ' {log}')

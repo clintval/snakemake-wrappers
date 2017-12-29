@@ -1,4 +1,4 @@
-"""Snakemake wrapper for picard MergeSamFiles."""
+"""Snakemake wrapper for picard MarkDuplicates."""
 
 __author__ = 'clintval'
 __copyright__ = 'Copyright 2018, Clint Valentine'
@@ -40,25 +40,11 @@ log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 if snakemake.resources.get('malloc'):
     extra += f' -Xmx{snakemake.resources.malloc}m'
 
-
-if isinstance(snakemake.input, dict):
-    input_files = snakemake.input['bams']
-    intervals = snakemake.input.pop('intervals', 'null')
-else:
-    input_files = snakemake.input
-    intervals = 'null'
-
-if isinstance(input_files, (list, tuple)):
-    input_files = ''.join(f' INPUT={bam}' for bam in input_files)
-else:
-    input_files = f' INPUT={input_files}'
-
-
 shell(
-    'picard MergeSamFiles'
+    'picard MarkDuplicates'
     ' {extra}'
-    ' {input_files}'
-    ' INTERVALS={intervals}'
-    ' OUTPUT={snakemake.output}'
+    ' INPUT={snakemake.input}'
+    ' OUTPUT={snakemake.output.bam}'
+    ' METRICS_FILE={snakemake.output.metrics}'
     ' {params}'
     ' {log}')

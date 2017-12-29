@@ -1,4 +1,4 @@
-"""Snakemake wrapper for picard MergeSamFiles."""
+"""Snakemake wrapper for picard CollectHsMetrics."""
 
 __author__ = 'clintval'
 __copyright__ = 'Copyright 2018, Clint Valentine'
@@ -6,6 +6,21 @@ __email__ = 'valentine.clint@gmail.com'
 __license__ = 'MIT'
 
 from snakemake.shell import shell
+
+bait_intervals = snakemake.input.get('bait_intervals')
+target_intervals = snakemake.input.get('target_intervals', 'null')
+
+if isinstance(bait_intervals, (list, tuple)):
+    bait_intervals = ''.join(f' BAIT_INTERVALS={interval}' for interval in bait_intervals)
+
+if isinstance(target_intervals, (list, tuple)):
+    target_intervals = ''.join(f' TARGET_INTERVALS={interval}' for interval in target_intervals)
+elif target_intervals == 'null':
+    target_intervals = bait_intervals
+
+summary_output = snakemake.output.get('summary_output', snakemake.output[0])
+per_target_coverage = snakemake.output.get('per_target_coverage', 'null')
+per_base_coverage = snakemake.output.get('per_base_coverage', 'null')
 
 def make_picard_params(params):
     import types
@@ -40,25 +55,14 @@ log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 if snakemake.resources.get('malloc'):
     extra += f' -Xmx{snakemake.resources.malloc}m'
 
-
-if isinstance(snakemake.input, dict):
-    input_files = snakemake.input['bams']
-    intervals = snakemake.input.pop('intervals', 'null')
-else:
-    input_files = snakemake.input
-    intervals = 'null'
-
-if isinstance(input_files, (list, tuple)):
-    input_files = ''.join(f' INPUT={bam}' for bam in input_files)
-else:
-    input_files = f' INPUT={input_files}'
-
-
 shell(
-    'picard MergeSamFiles'
+    'picard CollectHsMetrics'
     ' {extra}'
-    ' {input_files}'
-    ' INTERVALS={intervals}'
-    ' OUTPUT={snakemake.output}'
+    ' INPUT={snakemake.input.bam}'
+    ' OUTPUT={summary_output}'
+    ' PER_TARGET_COVERAGE={per_target_coverage}'
+    ' PER_BASE_COVERAGE={per_base_coverage}'
+    ' {bait_intervals}'
+    ' {target_intervals}'
     ' {params}'
     ' {log}')

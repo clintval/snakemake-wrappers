@@ -1,31 +1,53 @@
 """Snakemake wrapper for picard ExtractIlluminaBarcodes."""
 
-__author__ = "clintval"
-__copyright__ = "Copyright 2018, Clint Valentine"
-__email__ = "valentine.clint@gmail.com"
-__license__ = "MIT"
+__author__ = 'clintval'
+__copyright__ = 'Copyright 2018, Clint Valentine'
+__email__ = 'valentine.clint@gmail.com'
+__license__ = 'MIT'
 
 from snakemake.shell import shell
 
+def make_picard_params(params):
+    import types
+    formatted_params = ''
+
+    def clean_value(value):
+        if value is True:
+            return 'true'
+        elif value is False:
+            return 'false'
+        elif value is None:
+            return 'null'
+        elif isinstance(value, (list, tuple, types.GeneratorType)):
+            return list(map(clean_value, value))
+        else:
+            return value
+
+    for key, value in params.items():
+        if key == 'extra':
+            continue
+        value = clean_value(value)
+        if isinstance(value, list):
+            formatted_params += ''.join(f' {key.upper()}={v}' for v in value)
+        else:
+            formatted_params += f' {key.upper()}={value}'
+    return formatted_params
+
+extra = snakemake.params.get('extra', '')
+params = make_picard_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
-lane = snakemake.params["lane"]
-read_structure = snakemake.params['read_structure']
-
-extra = snakemake.params.get("extra", "")
-output_dir = snakemake.params.get("output_dir", "null")
-compress_outputs = snakemake.params.get('compress_outputs', 'true')
+if snakemake.resources.get('malloc'):
+    extra += f' -Xmx{snakemake.resources.malloc}m'
 
 shell(
-    "picard ExtractIlluminaBarcodes"
-    " {extra}"
-    " BASECALLS_DIR={snakemake.input.basecalls_dir}"
-    " OUTPUT_DIR={output_dir}"
-    " LANE={lane}"
-    " READ_STRUCTURE={read_structure}"
-    " BARCODE_FILE={snakemake.input.barcode_file}"
-    " METRICS_FILE={snakemake.output.metrics_file}"
-    " COMPRESS_OUTPUTS={compress_outputs}"
-    " NUM_PROCESSORS={snakemake.threads}"
-    " {log}")
+    'picard ExtractIlluminaBarcodes'
+    ' {extra}'
+    ' BARCODE_FILE={snakemake.input.barcode_file}'
+    ' BASECALLS_DIR={snakemake.input.basecalls_dir}'
+    ' METRICS_FILE={snakemake.output.metrics_file}'
+    ' OUTPUT_DIR={snakemake.output.output_dir}'
+    ' NUM_PROCESSORS={snakemake.threads}'
+    ' {params}'
+    ' {log}')
 
