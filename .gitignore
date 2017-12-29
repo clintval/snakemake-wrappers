@@ -1,6 +1,7 @@
-# Snakemake hidden files
+# Snakemake hidden files and EC2 settings
 .snakemake*
 /.snakemake
+sftp-config.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

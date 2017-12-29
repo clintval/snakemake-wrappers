@@ -59,7 +59,6 @@ shell(
     'picard CollectSequencingArtifactMetrics'
     ' {extra}'
     ' INPUT={snakemake.input.bam}'
-    ' OUTPUT={snakemake.output}'
-    ' REFERENCE_SEQUENCE={snakmake.input.reference}'
+    ' REFERENCE_SEQUENCE={snakemake.input.reference}'
     ' {params}'
     ' {log}')
