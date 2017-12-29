@@ -1,4 +1,4 @@
-"""Snakemake wrapper for picard MarkDuplicates."""
+"""Snakemake wrapper for picard CollectOxoGMetrics."""
 
 __author__ = 'clintval'
 __copyright__ = 'Copyright 2018, Clint Valentine'
@@ -56,10 +56,10 @@ if snakemake.resources.get('use_async_io_write_samtools') == 1:
     extra += ' -Dsamjdk.use_async_io_write_samtools=true'
 
 shell(
-    'picard MarkDuplicates'
+    'picard CollectOxoGMetrics'
     ' {extra}'
-    ' INPUT={snakemake.input}'
-    ' OUTPUT={snakemake.output.bam}'
-    ' METRICS_FILE={snakemake.output.metrics}'
+    ' INPUT={snakemake.input.bam}'
+    ' OUTPUT={snakemake.output}'
+    ' REFERENCE_SEQUENCE={snakmake.input.reference}'
     ' {params}'
     ' {log}')

@@ -37,8 +37,23 @@ extra = snakemake.params.get('extra', '')
 params = make_picard_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
+if snakemake.resources.get('gc_heap_free_limit'):
+    extra += f' -XX:GCHeapFreeLimit={snakemake.resources.gc_heap_free_limit}'
+
+if snakemake.resources.get('gc_time_limit'):
+    extra += f' -XX:GCTimeLimit={snakemake.resources.gc_time_limit}'
+
 if snakemake.resources.get('malloc'):
     extra += f' -Xmx{snakemake.resources.malloc}m'
+
+if snakemake.resources.get('samjdk_buffer_size'):
+    extra += f' -Dsamjdk.buffer_size={snakemake.resources.samjdk_buffer_size}'
+
+if snakemake.resources.get('use_async_io_read_samtools') == 1:
+    extra += ' -Dsamjdk.use_async_io_read_samtools=true'
+
+if snakemake.resources.get('use_async_io_write_samtools') == 1:
+    extra += ' -Dsamjdk.use_async_io_write_samtools=true'
 
 shell(
     'picard ExtractIlluminaBarcodes'
@@ -46,7 +61,7 @@ shell(
     ' BARCODE_FILE={snakemake.input.barcode_file}'
     ' BASECALLS_DIR={snakemake.input.basecalls_dir}'
     ' METRICS_FILE={snakemake.output.metrics_file}'
-    ' OUTPUT_DIR={snakemake.output.output_dir}'
+    ' OUTPUT_DIR={snakemake.output.barcodes_dir}'
     ' NUM_PROCESSORS={snakemake.threads}'
     ' {params}'
     ' {log}')
