@@ -7,9 +7,8 @@ __license__ = 'MIT'
 
 from snakemake.shell import shell
 
-from snakemake.shell import shell
 
-def make_picard_params(params):
+def make_fgbio_params(params):
     import types
     formatted_params = ''
 
@@ -25,14 +24,17 @@ def make_picard_params(params):
         else:
             return value
 
+    def clean_key(key):
+        return f'--{key.lower().replace("_", "-")}'
+
     for key, value in params.items():
         if key == 'extra':
             continue
         value = clean_value(value)
         if isinstance(value, list):
-            formatted_params += ''.join(f' {key.upper()}={v}' for v in value)
+            formatted_params += ''.join(f' {clean_key(key)}={v}' for v in value)
         else:
-            formatted_params += f' {key.upper()}={value}'
+            formatted_params += f' {clean_key(key)}={value}'
     return formatted_params
 
 extra = snakemake.params.get('extra', '')
