@@ -38,7 +38,7 @@ def make_fgbio_params(params):
     return formatted_params
 
 extra = snakemake.params.get('extra', '')
-params = make_picard_params(snakemake.params)
+params = make_fgbio_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 shell(
