@@ -92,12 +92,12 @@ var2vcf_valid_command += " -E" if do_not_print_end_tag else ""  # If set, do not
 if output_gvcf:
     command = " | ".join([
         vardict_command,
-        filter_for_variants_only,
         test_strand_bias_command,
         var2vcf_valid_command])
 else:
     command = " | ".join([
         vardict_command,
+        filter_for_variants_only,
         test_strand_bias_command,
         var2vcf_valid_command])
 
