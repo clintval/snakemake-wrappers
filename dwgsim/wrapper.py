@@ -36,4 +36,3 @@ shell(
     ' {snakemake.input}'
     ' {params.output_prefix}'
     ' {log}')
-
