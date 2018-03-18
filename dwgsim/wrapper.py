@@ -11,13 +11,11 @@ def make_params(params):
     formatted_params = ''
 
     for key, value in params.items():
-        if key == 'extra':
+        if key in ('extra', 'output_prefix'):
             continue
 
-        if key == 'r1':
-            key = '1'
-        elif key == 'r2':
-            key = '2'
+        key = '1' if key == 'r1' else key
+        key = '2' if key == 'r2' else key
 
         if value is True:
             formatted_params += f' -{key}'
@@ -36,6 +34,6 @@ shell(
     ' {extra}'
     ' {params}'
     ' {snakemake.input}'
-    ' {snakemake.output}'
+    ' {params.output_prefix}'
     ' {log}')
 
