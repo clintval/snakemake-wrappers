@@ -7,34 +7,19 @@ __license__ = 'MIT'
 
 from snakemake.shell import shell
 
-
 def make_params(params):
-    import types
     formatted_params = ''
-
-    def clean_value(value):
-        if value is True:
-            return 'true'
-        elif value is False:
-            return 'false'
-        elif value is None:
-            return 'null'
-        elif isinstance(value, (list, tuple, types.GeneratorType)):
-            return list(map(clean_value, value))
-        else:
-            return value
-
-    def make_key(key):
-        return f'-{key}'
 
     for key, value in params.items():
         if key == 'extra':
             continue
-        value = clean_value(value)
-        if isinstance(value, list):
-            formatted_params += ''.join(f' {make_key(key)} {v}' for v in value)
+
+        if value is True:
+            formatted_params += f' -{key}'
+        elif value is False:
+            continue
         else:
-            formatted_params += f' {make_key(key)} {value}'
+            formatted_params += f' -{key} {value}'
     return formatted_params
 
 extra = snakemake.params.get('extra', '')
