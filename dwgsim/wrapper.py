@@ -14,6 +14,11 @@ def make_params(params):
         if key == 'extra':
             continue
 
+        if key == 'r1':
+            key = '1'
+        elif key == 'r2':
+            key = '2'
+
         if value is True:
             formatted_params += f' -{key}'
         elif value is False:
