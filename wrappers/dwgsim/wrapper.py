@@ -25,6 +25,8 @@ def make_params(params):
             formatted_params += f' -{key} {value}'
     return formatted_params
 
+output_prefix = snakemake.params["output_prefix"]
+
 extra = snakemake.params.get('extra', '')
 params = make_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
@@ -34,5 +36,5 @@ shell(
     ' {extra}'
     ' {params}'
     ' {snakemake.input}'
-    ' {params.output_prefix}'
+    ' {output_prefix}'
     ' {log}')

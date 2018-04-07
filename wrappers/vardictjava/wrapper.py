@@ -34,7 +34,7 @@ output_gvcf = snakemake.params.get('output_gvcf', False)
 pstd_filter = snakemake.params.get('pstd_filter', 1)
 sample_name = snakemake.wildcards.sample
 
-prefix = snakemake.config.get('VarDictJavaRoot', None)
+prefix = snakemake.params.get('VarDictJavaRoot', None)
 
 if prefix is None:
     vardict_bin = 'VarDict'
