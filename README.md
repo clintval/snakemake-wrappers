@@ -3,6 +3,8 @@
 <p align="center">A Collection of Awesome Snakemake Wrappers</p>
 
 <p align="center">
+  <a href="#quickstart"><strong>Quickstart</strong></a>
+  ·
   <a href="#installation"><strong>Installation</strong></a>
   ·
   <a href="#wrapper-documentation"><strong>Wrapper Documentation</strong></a>
@@ -26,7 +28,7 @@
 
 This project aims to wrap bioinformatics utilities with style and variable type converters instead of strict, inflexible shell templates. The wrappers in this project are unaware of the command line flags of the tool the wrapper is wrapping!
 
-### Quickstart
+<h3 align="center">Quickstart</h3>
 
 For example, [`Picard`](https://broadinstitute.github.io/picard/) tools accept a list in the form of repeating options:
 
