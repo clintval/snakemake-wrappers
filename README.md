@@ -1,35 +1,29 @@
-<h1 align="center">snakemake-wrappers</h2>
+# snakescale
 
-<p align="center">A collection of awesome snakemake wrappers</p>
+[![Testing Status](https://travis-ci.org/clintval/snakescale.svg?branch=master)](https://travis-ci.org/clintval/snakescale)
+[![codecov](https://codecov.io/gh/clintval/snakescale/branch/master/graph/badge.svg)](https://codecov.io/gh/clintval/snakescale)
+[![Documentation Build Status](https://readthedocs.org/projects/snakescale/badge/?version=latest)](https://snakescale.readthedocs.io/en/latest/?badge=latest)
+[![PyPi Release](https://badge.fury.io/py/snakescale.svg)](https://badge.fury.io/py/snakescale)
+[![Python Versions](https://img.shields.io/pypi/pyversions/snakescale.svg)](https://pypi.python.org/pypi/snakescale/)
+[![MyPy Checked](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-<p align="center">
-  <a href="#installation"><strong>Installation</strong></a>
-  ·
-  <a href="#tutorial"><strong>Tutorial</strong></a>
-  ·
-  <a href="#contributing"><strong>Contributing</strong></a>
-</p>
+Future home of `snakescale`
+===
 
-<p align="center">
-  <a href="https://travis-ci.org/clintval/snakemake-wrappers"><img src="https://travis-ci.org/clintval/snakemake-wrappers.svg?branch=master"></img></a>
-  <a href="https://codecov.io/gh/clintval/snakemake-wrappers"><img src="https://codecov.io/gh/clintval/snakemake-wrappers/branch/master/graph/badge.svg"></img></a>
-  <a href="https://badge.fury.io/py/snv_spectrum"><img src="https://badge.fury.io/py/snv_spectrum.svg" alt="PyPI version"></img></a>
-  <a href="https://codeclimate.com/github/clintval/snakemake-wrappers/maintainability"><img src="https://api.codeclimate.com/v1/badges/7f6ce7780716a92c40b8/maintainability"></img></a>
-  <a href="https://github.com/clintval/snakemake-wrappers/blob/master/LICENSE"><img src="https://img.shields.io/pypi/l/snakemake-wrappers.svg"></img></a>
-</p>
+Non-strict wrappers for the data pipelining language Snakemake.
 
-<br>
-
-Brief description
-
-<br>
-
-<h3 align="center">Installation</h3>
-
-```
-❯ pip install ...
+```bash
+❯ # pip install snakescale
 ```
 
-<br>
+Features:
 
-<h3 align="center">Tutorial</h3>
+- Do the wrappers in the [official wrapper repository](https://bitbucket.org/snakemake/snakemake-wrappers) get you half of the way to writing rules in only Python syntax?
+- Do want your rules fully parameterized with the `input`, `output`, `resources`, and `params` keys only?
+- Do you want to use the builtin Python types as values to a rule?
+- Do you want to use the Snakemake resource system for JVM resources?
+- Do you want a Snakemake wrapper which hard-codes as little as possible besides the **style** of the CLI it's wrapping?
+Read the documentation at: [snakescale.readthedocs.io](http://snakescale.readthedocs.io/)
+
+This project aims to wrap bioinformatics utilities with style and variable type converters instead of strict, inflexible shell templates. The wrappers in this project are unaware of the command line flags of the tool the wrapper is wrapping!

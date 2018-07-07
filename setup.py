@@ -1,37 +1,34 @@
-from setuptools import setup
+import setuptools
+from setuptools import find_packages
 
-setup(
-    name='snakemake_wrappers',
-    packages=['snakemake_wrappers'],
-    version='0.1.0',
-    description='A collection of awesome snakemake wrappers.',
-    long_description=long_description,
+from pathlib import Path
+
+PACKAGE = 'snakescale'
+VERSION = '0.2.0'
+
+setuptools.setup(
+    name=PACKAGE,
+    version=VERSION,
     author='clintval',
     author_email='valentine.clint@gmail.com',
-    url='https://github.com/clintval/snakemake-wrappers',
-    download_url='https://github.com/clintval/snakemake-wrappers/archive/v0.1.0.tar.gz',
-    py_modules=['snakemake_wrappers'],
-    install_requires=[],
-    extras_require={
-        'ci': ['nose', 'codecov'],
-        'fancytest': ['nose', 'nose-progressive', 'coverage'],
-    },
+    description='Non-strict wrappers for the data pipelining language Snakemake.',
+    url=f'https://github.com/clintval/{PACKAGE}',
+    download_url=f'https://github.com/clintval/{PACKAGE}/archive/v{VERSION}.tar.gz',
+    long_description=Path('README.md').read_text(),
+    long_description_content_type='text/markdown',
     license='MIT',
-    zip_safe=True,
-    keywords=[
-        'signature',
-        'mutation',
-        'transition'
-        'transversion',
-        'spectra',
-        'bioinformatics'
-    ],
+    zip_safe=False,
+    install_requires=['snakemake>=4.5.1'],
+    keywords='snakemake pipeline wrapper',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
-        'Intended Audience :: Science/Research',
         'License :: OSI Approved :: MIT License',
-        'Topic :: Scientific/Engineering :: Bio-Informatics',
         'Programming Language :: Python :: 3.6',
-    ]
+        'Programming Language :: Python :: 3.7',
+    ],
+    project_urls={
+        'Documentation': f'https://{PACKAGE}.readthedocs.io',
+        'Issue-Tracker': f'https://github.com/clintval/{PACKAGE}/issues',
+    },
 )
