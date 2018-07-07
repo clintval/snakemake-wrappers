@@ -47,17 +47,17 @@ With these arguments as their respective Python types, this is how you would con
 include_non_pf_reads = False
 adapters_to_check = ['option1', 'option2']
 
-include_non_pf_reads_option = 'true' if include_non_pf_reads else 'false'
-adapters_to_check_options = ' '.join([f'ADAPTERS_TO_CHECK={s}' for s in adapters_to_check])
-
 rule picard_tool:
     input: infile
     output: outfile
+    params:
+        include_non_pf_reads_option='true' if include_non_pf_reads else 'false'
+        adapters_to_check_options=' '.join([f'ADAPTERS_TO_CHECK={s}' for s in adapters_to_check])
     shell: (
       'picard'
       ' INPUT={input} OUTPUT={output}'
-      ' INCLUDE_NON_PF_READS={include_non_pf_reads_option}'
-      ' {adapters_to_check_options}'
+      ' INCLUDE_NON_PF_READS={params.include_non_pf_reads_option}'
+      ' {params.adapters_to_check_options}'
     )
 ```
 
