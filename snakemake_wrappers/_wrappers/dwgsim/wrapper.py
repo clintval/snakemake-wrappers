@@ -6,11 +6,12 @@ __email__ = 'valentine.clint@gmail.com'
 __license__ = 'MIT'
 
 from snakemake.shell import shell
+from snakemake_wrappers.utils import make_dwgsim_params
 
 output_prefix = snakemake.params["output_prefix"]
 
 extra = snakemake.params.get('extra', '')
-params = make_params(snakemake.params)
+params = make_dwgsim_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 shell(

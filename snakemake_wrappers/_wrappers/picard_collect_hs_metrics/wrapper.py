@@ -6,6 +6,15 @@ __email__ = 'valentine.clint@gmail.com'
 __license__ = 'MIT'
 
 from snakemake.shell import shell
+from snakemake_wrappers.utils import collect_jvm_resources
+from snakemake_wrappers.utils import collect_picard_style_jvm_resources
+from snakemake_wrappers.utils import make_fgbio_params
+
+extra = snakemake.params.get('extra', '')
+extra += collect_jvm_resources()
+extra += collect_picard_style_jvm_resources()
+params = make_picard_params(snakemake.params)
+log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 bait_intervals = snakemake.input['bait_intervals']
 target_intervals = snakemake.input.get('target_intervals', 'null')
@@ -25,10 +34,6 @@ else:
 summary_output = snakemake.output.get('summary_output', snakemake.output[0])
 per_target_coverage = snakemake.output.get('per_target_coverage', 'null')
 per_base_coverage = snakemake.output.get('per_base_coverage', 'null')
-
-extra = snakemake.params.get('extra', '')
-params = make_picard_params(snakemake.params)
-log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
 shell(
     'picard CollectHsMetrics'
