@@ -1,31 +1,25 @@
 from setuptools import setup
 
+NAME = 'snakemake-wrappers'
+PACKAGE = 'snakemake_wrappers'
+VERSION = '0.1.0'
+
+ARTIFACT = f'https://github.com/clintval/{NAME}/archive/v{VERSION}.tar.gz'
+URL = f'https://github.com/clintval/{NAME}'
+
 setup(
-    name='snakemake_wrappers',
-    packages=['snakemake_wrappers'],
-    version='0.1.0',
-    description='A collection of awesome snakemake wrappers.',
-    long_description=long_description,
+    name=PACKAGE,
+    packages=[PACKAGE],
+    version=VERSION,
+    description='A collection of awesome snakemake wrappers',
     author='clintval',
     author_email='valentine.clint@gmail.com',
-    url='https://github.com/clintval/snakemake-wrappers',
-    download_url='https://github.com/clintval/snakemake-wrappers/archive/v0.1.0.tar.gz',
-    py_modules=['snakemake_wrappers'],
-    install_requires=[],
-    extras_require={
-        'ci': ['nose', 'codecov'],
-        'fancytest': ['nose', 'nose-progressive', 'coverage'],
-    },
+    url=URL,
+    download_url=ARTIFACT,
+    py_modules=[PACKAGE],
     license='MIT',
     zip_safe=True,
-    keywords=[
-        'signature',
-        'mutation',
-        'transition'
-        'transversion',
-        'spectra',
-        'bioinformatics'
-    ],
+    keywords='snakemake',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
