@@ -1,0 +1,6 @@
+channels:
+  - bioconda
+  - r
+dependencies:
+  - scalpel==1.5.8
+  - r=3.3.1

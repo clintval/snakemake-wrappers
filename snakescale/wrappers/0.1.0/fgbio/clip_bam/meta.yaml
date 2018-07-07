@@ -1,0 +1,4 @@
+name: fgbio ClipBam
+description: Clip and trim sequences in a BAM file.
+authors:
+  - Clint Valentine

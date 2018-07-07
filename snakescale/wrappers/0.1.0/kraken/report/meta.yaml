@@ -1,0 +1,4 @@
+name: kraken report
+description: Summarize taxonomic classifications from the utility Kraken.
+authors:
+  - Clint Valentine

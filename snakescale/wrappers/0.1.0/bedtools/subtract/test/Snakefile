@@ -1,0 +1,5 @@
+
+rule bedtools_subtract:
+    input:  a="data/a.bed", b="data/b.bed"
+    output: "data/subtracted.bed"
+    wrapper: "file://../../subtract"

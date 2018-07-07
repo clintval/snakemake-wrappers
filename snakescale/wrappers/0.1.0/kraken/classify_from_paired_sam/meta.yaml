@@ -1,0 +1,4 @@
+name: kraken classify
+description: Classify sequences using the taxonomic classifier Kraken.
+authors:
+  - Clint Valentine

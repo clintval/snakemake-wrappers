@@ -1,0 +1,4 @@
+name: bedtools subtract
+description: Subtract one interval set from another with bedtools.
+authors:
+  - Clint Valentine

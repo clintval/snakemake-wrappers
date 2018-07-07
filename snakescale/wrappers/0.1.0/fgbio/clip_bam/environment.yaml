@@ -1,0 +1,4 @@
+channels:
+  - bioconda
+dependencies:
+  - fgbio==0.7.0
