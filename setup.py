@@ -5,7 +5,7 @@ from setuptools import find_packages
 from pathlib import Path
 
 PACKAGE = 'snakescale'
-VERSION = '0.7.0'
+VERSION = '0.8.0'
 
 for path in Path('snakescale/wrappers/').rglob('.snakemake'):
     shutil.rmtree(path)
