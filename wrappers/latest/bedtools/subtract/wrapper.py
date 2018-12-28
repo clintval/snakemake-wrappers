@@ -14,7 +14,7 @@ params = format_bedtools_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
 command = (
-     'bedtools subtract'
+    'bedtools subtract'
     ' {extra}'
     ' {params}'
     ' -a {snakemake.input.a}'
