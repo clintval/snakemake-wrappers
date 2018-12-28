@@ -1,0 +1,26 @@
+package:
+  name: snakescale
+  version: !!str 0.2.0
+
+source:
+  fn: v0.2.0.tar.gz
+  url: https://github.com/clintval/snakescale/archive/v0.2.0.tar.gz
+  md5: 5360fc6b0caffb75fa2390908a47e4e3
+
+requirements:
+  build:
+    - python
+  run:
+    - python
+
+test:
+  imports:
+    - snakescale
+
+about:
+  home: https://github.com/clintval/snakescale
+  license: MIT License
+  summary: 'Non-strict wrappers for the data pipelining language Snakemake'
+
+# https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html
+# for more information about meta.yaml
