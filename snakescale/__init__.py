@@ -18,7 +18,7 @@ __all__ = [
 
 DEFAULT_SCALE_FILENAME = 'wrapper.py'
 DEFAULT_SCALE_VERSION = 'latest'
-WRAPPER_ROOT_PATH = Path(__file__).parent.parent / 'wrappers'
+WRAPPER_ROOT_PATH = Path(__file__).parent / 'wrappers'
 
 AVAILABLE_WRAPPER_VERSIONS = set(map(lambda _: _.name, WRAPPER_ROOT_PATH.glob('*')))
 
