@@ -4,8 +4,10 @@
 [![codecov](https://codecov.io/gh/clintval/snakescale/branch/master/graph/badge.svg)](https://codecov.io/gh/clintval/snakescale)
 [![Documentation Build Status](https://readthedocs.org/projects/snakescale/badge/?version=latest)](https://snakescale.readthedocs.io/en/latest/?badge=latest)
 [![PyPi Release](https://badge.fury.io/py/snakescale.svg)](https://badge.fury.io/py/snakescale)
+[![Anaconda-Server Badge](https://anaconda.org/clintval/snakescale/badges/version.svg)](https://anaconda.org/clintval/snakescale)
 [![Python Versions](https://img.shields.io/pypi/pyversions/snakescale.svg)](https://pypi.python.org/pypi/snakescale/)
-[![MyPy Checked](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+[![MyPy Checked](http://www.mypy-lang.org/static/mypy_badge.svg)]
+(http://mypy-lang.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
 Non-strict wrappers for the data pipelining language Snakemake.

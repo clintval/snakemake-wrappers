@@ -4,7 +4,7 @@ from setuptools import find_packages
 from pathlib import Path
 
 PACKAGE = 'snakescale'
-VERSION = '0.3.0'
+VERSION = '0.4.0'
 
 setuptools.setup(
     name=PACKAGE,

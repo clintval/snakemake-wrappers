@@ -1,4 +1,6 @@
 channels:
+  - clinval
   - bioconda
 dependencies:
-  - bedtools==2.27.1
+  - snakescale
+  - bedtools
