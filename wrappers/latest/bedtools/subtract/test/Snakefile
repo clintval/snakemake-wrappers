@@ -4,6 +4,6 @@ rule bedtools_subtract:
     input:  a='data/a.bed', b='data/b.bed'
     output: 'data/result.bed'
     params:
-        no_name_check=True,
+        no_name_cdheck=True,
         g='data/ref.genome'
     wrapper: scale('bedtools', 'subtract')
