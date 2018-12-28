@@ -1,6 +1,12 @@
-"""Snakemake wrapper for Scalpel"""
+"""Snakemake wrapper for Scalpel."""
+
+__author__ = 'fangyinlo'
+__copyright__ = 'Copyright 2018, Fang Yin Lo'
+__email__ = 'fangyinlot@gmail.com'
+__license__ = 'MIT'
 
 from pathlib import Path
+
 from snakemake.shell import shell
 
 kmer = snakemake.params.get('kmer', 25)
@@ -14,13 +20,11 @@ step = snakemake.params.get('step', 100)
 mapscore = snakemake.params.get('mapscore', 1)
 pathlimit = snakemake.params.get('pathlimit', 1_000_000)
 mismatches = snakemake.params.get('mismatches', 3)
-dir = snakemake.params.get('dir', './outdir')
+outdir = snakemake.params.get('dir', './outdir')
 numprocs = snakemake.params.get('numprocs', 1)
 sample = snakemake.params.get('sample', 'ALL')
 coords = snakemake.params.get('coords', 'null')
 prefix = snakemake.input.get('scalpel_path')
-
-print("prefix=" + prefix)
 
 if prefix is None:
     scalpel_path = 'scalpel-discovery'
@@ -28,8 +32,6 @@ if prefix is None:
 else:
     prefix = Path(prefix)
     scalpel_path = str(prefix / 'scalpel-discovery')
-
-print("scalpel_path=" + scalpel_path)
 
 scalpel_command = (
     "{scalpel_path}"
@@ -48,7 +50,7 @@ scalpel_command = (
     " --mapscore {mapscore}"  # < int> minimum mapping quality for selecting reads to assemble [default 1]
     " --pathlimit {pathlimit}"  # < int> limit number of sequence paths to [default 1000000]
     " --mismatches {mismatches}"  # < int> max number of mismatches in near-perfect repeat detection [default 3]
-    " --dir {dir}"  # < directory> output directory [default ./outdir]
+    " --dir {outdir}"  # < directory> output directory [default ./outdir]
     " --numprocs {numprocs}"  # < int> number of parallel jobs (1 for no parallelization) [default 1]
     " --sample {sample}"  # < string> only process reads/fragments in sample [default ALL]
     " --coords {coords}"  # < file> file with list of selected locations to examine [defau

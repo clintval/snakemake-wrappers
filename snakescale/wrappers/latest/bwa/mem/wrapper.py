@@ -6,10 +6,11 @@ __email__ = 'valentine.clint@gmail.com'
 __license__ = 'MIT'
 
 from snakemake.shell import shell
-from snakemake_wrappers.utils import collect_jvm_resources
-from snakemake_wrappers.utils import collect_picard_style_jvm_resources
-from snakemake_wrappers.utils import make_bwa_params
-from snakemake_wrappers.utils import make_picard_params
+
+from snakescale.utils import collect_jvm_resources
+from snakescale.utils import collect_picard_style_jvm_resources
+from snakescale.utils import make_bwa_params
+from snakescale.utils import make_picard_params
 
 extra = snakemake.params.get('extra', '')
 extra += collect_jvm_resources()

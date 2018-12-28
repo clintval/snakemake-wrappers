@@ -7,13 +7,13 @@ __email__ = 'valentine.clint@gmail.com'
 __license__ = 'MIT'
 
 import uuid
-
 from pathlib import Path
 
 from snakemake.shell import shell
-from snakemake_wrappers.utils import make_kraken_params
-from snakemake_wrappers.utils import make_picard_params
-from snakemake_wrappers.utils import collect_picard_style_jvm_resources
+
+from snakescale.utils import collect_picard_style_jvm_resources
+from snakescale.utils import make_kraken_params
+from snakescale.utils import make_picard_params
 
 sam_to_fastq_params = make_picard_params(snakemake.params.get('sam_to_fastq', {}))
 kraken_params = make_kraken_params(snakemake.params.get('kraken', {}))

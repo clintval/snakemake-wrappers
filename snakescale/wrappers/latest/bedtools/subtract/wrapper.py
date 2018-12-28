@@ -7,10 +7,16 @@ __license__ = 'MIT'
 
 from snakemake.shell import shell
 
+from snakescale.formatters import format_bedtools_params
+
+extra = snakemake.params.get('extra', '')
+params = format_bedtools_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
 shell(
     'bedtools subtract'
+    ' {extra}'
+    ' {params}'
     ' -a {snakemake.input.a}'
     ' -b {snakemake.input.b}'
     ' > {snakemake.output} {log}'

@@ -6,6 +6,7 @@ __email__ = "valentine.clint@gmail.com"
 __license__ = "MIT"
 
 from pathlib import Path
+
 from snakemake.shell import shell
 
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
@@ -73,7 +74,7 @@ vardict_command += (
 vardict_command += " {snakemake.input.bed}"  # "region_info" file
 
 filter_for_variants_only = (
-    'awk "{{if (\$6 != \$7) print}}"'  # Filter for non-reference matching alternate records
+    r'awk "{{if (\$6 != \$7) print}}"'  # Filter for non-reference matching alternate records
 )
 
 test_strand_bias_command = (
