@@ -1,13 +1,13 @@
 {% set name = "snakescale" %}
-{% set version = "0.2.0" %}
+{% set version = "0.3.0" %}
 
 package:
   name: "{{ name|lower }}"
   version: "{{ version }}"
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cf7775431ab352a3f2bf957ca0ab4ea93560ba0e1fa1dddeccf4269d077dfca1
+  #url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  #sha256: cf7775431ab352a3f2bf957ca0ab4ea93560ba0e1fa1dddeccf4269d077dfca1
 
 build:
   number: 0

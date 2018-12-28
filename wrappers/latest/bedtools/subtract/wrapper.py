@@ -13,11 +13,13 @@ extra = snakemake.params.get('extra', '')
 params = format_bedtools_params(snakemake.params)
 log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
-shell(
-    'bedtools subtract'
+command = (
+     'bedtools subtract'
     ' {extra}'
     ' {params}'
     ' -a {snakemake.input.a}'
     ' -b {snakemake.input.b}'
     ' > {snakemake.output} {log}'
 )
+
+shell(command)

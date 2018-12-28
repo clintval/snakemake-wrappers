@@ -1,5 +1,4 @@
 include README.md
 include LICENSE
 include docs/CONTRIBUTING.md
-recursive-include wrappers *
 recursive-include docs *.rst

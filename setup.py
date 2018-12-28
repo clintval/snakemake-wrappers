@@ -18,6 +18,7 @@ setuptools.setup(
     long_description_content_type='text/markdown',
     license='MIT',
     zip_safe=False,
+    packages=find_packages(),
     install_requires=['snakemake>=4.5.1'],
     keywords='snakemake pipeline wrapper',
     classifiers=[
