@@ -19,6 +19,10 @@ setuptools.setup(
     license='MIT',
     zip_safe=False,
     packages=find_packages(),
+    package_data={
+        '': ['']
+    },
+    include_package_data=True,
     install_requires=['snakemake>=4.5.1'],
     keywords='snakemake pipeline wrapper',
     classifiers=[
@@ -30,6 +34,6 @@ setuptools.setup(
     ],
     project_urls={
         'Documentation': f'https://{PACKAGE}.readthedocs.io',
-        'Issue-Tracker': f'https://github.com/clintval/{PACKAGE}/issues',
+        'Issue Tracker': f'https://github.com/clintval/{PACKAGE}/issues',
     },
 )

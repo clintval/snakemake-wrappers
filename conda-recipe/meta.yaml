@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 4cf5b989aef26491a618d8fa3339f936da16f6a9e4237f8fe6a94e4ae34d0540
+  sha256: 473f5757a422219f97a3f04429c84d8a65d4eac8779601563fe94c3948400d31
 
 build:
   number: 0
@@ -29,7 +29,7 @@ about:
   license_family: MIT
   license_file: 
   summary: Non-strict wrappers for the data pipelining language Snakemake.
-  doc_url: 
+  doc_url: http://snakescale.readthedocs.io/
   dev_url: 
 
 extra:

@@ -2,6 +2,7 @@ language: python
 cache: pip
 python:
   - 3.6
+
 install:
   - sudo apt-get update
   - wget -O miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -10,12 +11,17 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
-  - conda install virtualenv
   - conda info -a
+  - conda install virtualenv
   - pip install codecov tox-travis
+  - pip install requests jinja2 anaconda-client
+
 script:
   - tox
+  - conda build conda-recipe
+
 after_success:
   - codecov
+
 notifications:
   email: false
