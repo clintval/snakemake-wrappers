@@ -3,7 +3,7 @@ Welcome to the ``snakescale`` Documentation!
 
 .. code-block:: bash
 
-    ❯ pip install snakescale
+    ❯ pip install 'snakescale[full]'
 
 Features
 --------
