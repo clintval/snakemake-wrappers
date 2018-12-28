@@ -1,26 +1,36 @@
+{% set name = "snakescale" %}
+{% set version = "0.2.0" %}
+
 package:
-  name: snakescale
-  version: !!str 0.2.0
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
 
 source:
-  fn: v0.2.0.tar.gz
-  url: https://github.com/clintval/snakescale/archive/v0.2.0.tar.gz
-  md5: 5360fc6b0caffb75fa2390908a47e4e3
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: cf7775431ab352a3f2bf957ca0ab4ea93560ba0e1fa1dddeccf4269d077dfca1
+
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed -vv "
 
 requirements:
-  build:
+  host:
+    - pip
     - python
+    - snakemake >=4.5.1
   run:
     - python
-
-test:
-  imports:
-    - snakescale
+    - snakemake >=4.5.1
 
 about:
   home: https://github.com/clintval/snakescale
-  license: MIT License
-  summary: 'Non-strict wrappers for the data pipelining language Snakemake'
+  license: MIT
+  license_family: MIT
+  license_file: 
+  summary: Non-strict wrappers for the data pipelining language Snakemake.
+  doc_url: 
+  dev_url: 
 
-# https://conda.io/docs/user-guide/tasks/build-packages/define-metadata.html
-# for more information about meta.yaml
+extra:
+  recipe-maintainers:
+    - clintval
