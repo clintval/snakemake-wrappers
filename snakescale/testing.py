@@ -15,14 +15,7 @@ TEST_ARGUMENTS_BASE += f' --cores {available_cpu_count()}'
 def run_tool_test(
     tool: str, subtool: Optional[str] = None, version: str = 'latest'
 ) -> ProcessReturn:
-    """Execute a tool and optional subtool test against a specific wrapper version.
-
-    Examples:
-        >>> process_return = run_tool_test('bedtools', 'subtract')
-        >>> process_return.exit_code.is_ok()
-        True
-
-    """
+    """Execute a tool and optional subtool test against a specific wrapper version."""
     from snakescale import scale
 
     wrapper_dir = Path(scale(tool, subtool, version, as_uri=False)) / 'test'

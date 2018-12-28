@@ -48,11 +48,11 @@ def call_snakemake(arguments: str) -> ProcessReturn:
         arguments: A string of arguments to pass to Snakemake.
 
     Examples:
-        >>> process_return = call_snakemake('--version')
+        >>> process_return = call_snakemake('')
         >>> process_return.exit_code.is_ok()
-        True
-        >>> process_return.stdout.strip()
-        '5.3.1'
+        False
+        >>> process_return.stderr.strip()
+        'Error: Snakefile "Snakefile" not present.'
 
     """
     current_environ = dict(os.environ)
