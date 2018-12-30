@@ -1,4 +1,7 @@
 from snakescale.testing import run_tool_test
+from snakescale import scale
+
+from pathlib import Path
 
 
 def test_bedtools_subtract():

@@ -41,7 +41,7 @@ Features:
 - Continuous support for new tool arguments and options by smart parameter style conversion:
     ```python
     >>> params:
-    ...     this_flag_is_so_new=false
+    ...     this_flag_is_so_new=False
     >>> wrapper: scale('picard', 'tool')
     ```
     ```bash

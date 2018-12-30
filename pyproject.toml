@@ -8,6 +8,7 @@ exclude = '''
     \.git
   | \.mypy_cache
   | \.tox
+  | \.snakemake
   | venv
   | _build
   | buck-out

@@ -54,4 +54,4 @@ def scale(
     wrapper_file = wrapper_dir / DEFAULT_SCALE_FILENAME
 
     assert wrapper_file.exists(), f'Wrapper does not exist: {wrapper_file}'
-    return wrapper_dir.as_uri() if as_uri is True else str(wrapper_dir)
+    return f'file:{wrapper_dir}' if as_uri is True else str(wrapper_dir)

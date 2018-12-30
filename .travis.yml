@@ -1,27 +1,34 @@
 language: python
-cache: pip
+
 python:
-  - 3.6
+  - "3.6"
+
+before_install:
+  - sudo rm -f /etc/boto.cfg
 
 install:
-  - sudo apt-get update
-  - wget -O miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+  - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
-  - conda update -q conda
-  - conda info -a
-  - conda install virtualenv  # Use conda's virtualenv for Tox
-  - pip install codecov tox-travis
-  - pip install requests jinja2 anaconda-client
+  - conda update --quiet conda
+  - conda info --all
+  - conda config --add channels defaults
+  - conda config --add channels conda-forge
+  - conda config --add channels bioconda
+  - conda create -q -n snakemake snakemake virtualenv python=$TRAVIS_PYTHON_VERSION
+  - source activate snakemake
+  - pip install ./
+  - pip install --requirement test-requirements.txt codecov tox
 
 script:
-  - tox
-  - conda build conda-recipe
+  - source activate snakemake
+  - ./run-tests
 
-after_success:
-  - codecov
+# after_success:
+#   - source activate snakemake
+#   - codecov
 
 notifications:
   email: false

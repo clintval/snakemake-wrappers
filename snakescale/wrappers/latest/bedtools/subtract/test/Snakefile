@@ -3,6 +3,7 @@ from snakescale import scale
 rule bedtools_subtract:
     input:  a='data/a.bed', b='data/b.bed'
     output: 'data/result.bed'
+    log: 'data/result.log'
     params:
         no_name_check=True,
         g='data/ref.genome'
