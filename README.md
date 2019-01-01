@@ -12,7 +12,7 @@
 Non-strict wrappers for the data pipelining language Snakemake.
 
 ```bash
-❯ pip install 'snakescale[full]'
+❯ conda install -c bioconda snakemake snakescale
 ```
 
 Features:
