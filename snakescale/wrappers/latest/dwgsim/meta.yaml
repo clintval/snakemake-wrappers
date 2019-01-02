@@ -1,0 +1,4 @@
+name: dwgsim
+description: Simulate sequencing reads.
+authors:
+  - Clint Valentine

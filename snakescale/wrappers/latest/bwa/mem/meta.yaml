@@ -1,0 +1,4 @@
+name: bwa mem
+description: Align sequence alignment data.
+authors:
+  - Clint Valentine

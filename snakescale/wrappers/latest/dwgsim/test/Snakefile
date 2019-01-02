@@ -1,0 +1,31 @@
+from snakescale import scale
+
+output_prefix = 'data/result'
+
+rule dwgsim:
+    input: 'data/reference.fa'
+    output: 
+        output_prefix + '.bfast.fastq',
+        output_prefix + '.bwa.read1.fastq',
+        output_prefix + '.bwa.read2.fastq',
+        output_prefix + '.mutations.txt',
+        output_prefix + '.mutations.vcf',
+    params:
+        output_prefix=output_prefix,
+        r1=141,      # Length of read one (flag `-1`)
+        r2=141,      # Length of read two (flag `-2`)
+        c=0,         # Generate reads for platform `Illumina`
+        d=150,       # Outer distance between two ends for pairs
+        s=50,        # Standard deviation of the distance between pairs
+        C=100,       # Mean coverage across available positions
+        e=0.003,     # Error rate per base in first read
+        E=0.004,     # Error rate per base in second read
+        r=0.001,     # Mutation rate
+        F=0.0001,    # Somatic mutation rate
+        R=0,         # Fraction of mutations that are indel
+        X=0,         # Probability an indel is extended
+        y=0.01,      # Probability of a random DNA read
+        n=10,        # Maximum number of Ns allowed in a given read
+        z=42,        # Random seed
+    log: 'data/result.log'
+    wrapper: scale('dwgsim')

@@ -1,0 +1,4 @@
+name: scalpel single
+description: Call variants over a single BAM file with Scalpel.
+authors:
+  - Clint Valentine

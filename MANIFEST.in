@@ -5,3 +5,8 @@ recursive-include docs *.rst
 recursive-include snakescale/wrappers Snakefile
 recursive-include snakescale/wrappers *.yaml wrapper.py
 recursive-include snakescale/wrappers *.bed *.genome
+recursive-include snakescale/wrappers *.bam *.bai *vcf *vcf.gz
+recursive-include snakescale/wrappers *.fa *.fasta *.fa.gz *.fasta.gz
+recursive-include snakescale/wrappers *mutations.txt  # dwgsim wrapper
+
+

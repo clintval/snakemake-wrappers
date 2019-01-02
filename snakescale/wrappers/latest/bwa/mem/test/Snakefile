@@ -1,0 +1,26 @@
+from snakescale import scale
+
+rule align_with_bwa_mem:
+    input:
+        reference='data/reference.fa',
+        unmapped_bam='data/infile.bam'
+    output: 'data/result.bam'
+    params:
+        sam_to_fastq={
+            'clipping_action': 'N',
+            'clipping_attribute': 'XT',
+            'clipping_min_length': 25,
+            'interleave': True,
+            'include_non_pf_reads': False
+        },
+        bwa_mem={'p': True, 'v': 2},
+        merge_bam_alignment={
+            'aligner_proper_pair_flags': False,
+            'attributes_to_retain': ['X0', 'ZS', 'ZI', 'ZM', 'ZC', 'ZN'],
+            'clip_adapters': False,
+            'expected_orientations': 'FR',
+            'max_insertions_or_deletions': -1,
+            'sort_order': 'coordinate'
+        }
+    log: 'data/result.log'
+    wrapper: scale('bwa', 'mem')

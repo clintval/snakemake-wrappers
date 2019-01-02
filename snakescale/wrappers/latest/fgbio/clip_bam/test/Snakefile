@@ -1,0 +1,16 @@
+from snakescale import scale
+
+rule ClipBam:
+    input:
+        bam='data/infile.bam,
+        reference='data/reference.fa',
+    output: 'data/result.bam',
+    params:
+        auto_clip_attributes=True,
+        clipping_mode='Hard',
+        clip_overlapping_reads=True,
+        read_one_five_prime=5,
+        read_two_five_prime=5,
+        upgrade_clipping=True,
+    log: 'data/result.log'
+    wrapper: scale('fgbio', 'clip_bam')
